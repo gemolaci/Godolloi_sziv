@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Gödöllői Szív Maraton instant túra információk, GPX letöltés, térkép, túraleírás és teljesítési lista.">
+    <title>Gödöllői Szív Maraton</title>
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://tile.openstreetmap.org">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/@raruto/leaflet-elevation/dist/leaflet-elevation.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#top" aria-label="Gödöllői Szív Maraton kezdőlap">
+            <span class="brand-mark" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 3.99 4 6.5 4 8.04 4 9.54 4.81 10.5 6.09 11.46 4.81 12.96 4 14.5 4 17.01 4 19 6 19 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="var(--accent)" />
+                </svg>
+            </span>
+            <span>Gödöllői Szív Maraton</span>
+        </a>
+        <nav class="site-nav" aria-label="Fő navigáció">
+            <a href="#info">Túra</a>
+            <a href="#route-section">Útvonal</a>
+            <a href="#waypoints">Szakaszok</a>
+            <a href="#description">Leírás</a>
+            <a href="#history">Történelem</a>
+        </nav>
+    </header>
+
+    <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-media" role="img" aria-label="Gödöllő környéki erdei útvonal hangulati képe"></div>
+            <img class="hero-route-outline" src="assets/images/route-outline.svg" alt="" aria-hidden="true">
+            <div class="hero-content">
+                <p class="eyebrow">Instant túra</p>
+                <h1 id="hero-title">Gödöllői Szív Maraton</h1>
+                <p class="hero-copy">Önállóan teljesíthető instant túra a geogo szabályai szerint</p>
+                <div class="hero-actions" aria-label="Gyors műveletek">
+                    <a class="button primary" href="assets/gpx/godolloi-sziv-maraton.gpx" download>GPX letöltése</a>
+                    <a class="button secondary" href="#route-section">Útvonal</a>
+                </div>
+            </div>
+            <div class="hero-icons">
+                <img src="assets/icons/geogo.svg" alt="Icon 1">
+                <img src="assets/icons/Otproba-feher.png" alt="Icon 2">
+            </div>
+        </section>
+
+        <section class="stats" aria-label="Túra fő adatai">
+            <article>
+                <span>Táv</span>
+                <strong>39.2 km</strong>
+            </article>
+            <article>
+                <span>Szint</span>
+                <strong>704 m</strong>
+            </article>
+            <article>
+                <span>Rajt / cél / irány</span>
+                <strong>tetszőleges</strong>
+            </article>
+            <article>
+                <span>Terep | aszfalt</span>
+                <strong>80% | 20% </strong>
+            </article>
+            <article>
+                <span>Teljesítés</span>
+                <strong>geogo</strong>
+            </article>
+        </section>
+
+        <section id="fastest_times" class="section two-column">
+            <div>
+                <p class="eyebrow">Leggyorsabb női teljesítés</p>
+                <p><b>még nincs</b></p>
+                <p>Teljesítési lista a túra geogo oldalán bejelentkezés után.</p>
+            </div>
+            <div>
+                <p class="eyebrow">Leggyorsabb férfi teljesítés</p>
+                <p><b>még nincs</b></p>
+            </div>
+        </section>
+
+        <section id="info" class="section two-column">
+            <div>
+                <p class="eyebrow">Túrainformációk</p>
+                <h2>A túra röviden</h2>
+                <p>
+                    A Gödöllői Szív Maraton egy publikus ingyenesen teljesíthető instant túra. A teljesítéshez a geogo alkalmazás szükséges, mellyel ötpróba pontot is gyűjthetsz, bővebben:
+                    <a href="https://geogo.hu/" target="_blank" rel="noopener noreferrer" class="btn-link">
+                        geogo.hu
+                    </a>
+                </p>
+                <p>
+                    Fedezd fel a Gödöllői-dombság egyik legkülönlegesebb kihívását! A szív alakú útvonal egyedülálló élményt kínál, bár valamivel rövidebb a klasszikus maratonnál, a hullámos terep és a változatos burkolatok garantálják a komoly próbatételt. Az út során a környék jellegzetes úthálózata köszön vissza – erdei ösvények, homokos, kavicsos és aszfaltos szakaszok váltják egymást.
+                </p>
+                <p>
+                    Indulj bármelyik ellenőrzőponttól, haladj a saját tempódban, és teljesítsd a túrát úgy, ahogy neked a legjobban esik!
+                </p>
+                <p>
+                    Egyedi teljesítési érem hamarosan elérhető és ingyenesen igényelhető. Személyesen Nagytarcsán, vagy postázással (feladási költség).
+                </p>
+                    <img src="assets/images/Sample_covered_small.png" alt="coming soon">
+            </div>
+            <div class="notice">
+                <h3>Fontos tudnivalók</h3>
+                <ul>
+                    <li>A túra ingyenesen teljesíthető</li>
+                    <li>Szintidő: 10 óra</li>
+                    <li>Teljesítés igazolása geogo-val</li>
+                    <li>
+                        Geogo futás/túra <a href="https://geogo.hu/hu/szabalyzat-hu" target="_blank" rel="noopener noreferrer">
+                            szabályai
+                        </a>szerint
+                    </li>
+                    <li>Tetszőleges ellenőrző ponttól és irányban</li>
+                    <li>A túra saját felelősségre teljesíthető!</li>
+                    <li>Indulás előtt ellenőrizd az időjárást és az útvonal járhatóságát!</li>
+                    <li>Szintidőn belüli teljesítésért érem igényelhető</li>
+                    <li>
+                        További információk a túra geogo oldalán
+                        <a href="https://geogo.hu/" target="_blank" rel="noopener noreferrer">
+                            geogo.hu
+                        </a> Hamarosan
+                    </li>
+                    <li>
+                        Szervező:
+                        <a href="mailto:gemolaci@gmail.com">gemolaci@gmail.com</a>,
+                        <a href="tel:+36703974343">+36 70 397 4343</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="route-section" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Útvonal</p>
+                <h2>Interaktív térkép</h2>
+                <p>A túra útvonala. Kattints az ikonokra az útvonalpont megjelenítéshez. Nagyítsd ki tetszés szerint.</p>
+            </div>
+            <div class="map-shell">
+                <div id="map" aria-label="Gödöllői Szív Maraton útvonaltérkép"></div>
+                <div id="map-status" class="map-status" role="status">GPX betöltése...</div>
+            </div>
+            <div id="elevation-div"></div>
+        </section>
+
+        <section id="gpx" class="section download-band">
+            <div>
+                <p class="eyebrow">Letöltés</p>
+                <h2>GPX útvonalpontokkal</h2>
+                <p>A GPX útvonal navigációs alkalmazásokban és sportórákon használható.</p>
+            </div>
+            <a class="button primary" href="assets/gpx/godolloi-sziv-maraton.gpx" download>GPX letöltése</a>
+            <a class="button strava" href="https://www.strava.com/routes/3490377226366042872" target="_blank" rel="noopener noreferrer">
+                Strava link
+            </a>
+        </section>
+
+        <section id="waypoints" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Szakaszok</p>
+                <h2>Ellenőrző pontok</h2>
+                <p>Pontok közötti távolság és szintadatok.</p>
+            </div>
+            <div class="table-wrapper">
+                <table class="tour-table">
+                    <thead>
+                        <tr>
+                            <th>Ellenőrző ponttól</th>
+                            <th>Ellenőrző pontig</th>
+                            <th>Távolság (km)</th>
+                            <th>Emelkedés (m)</th>
+                            <th>Süllyedés (m)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Füzesliget</td><td>Ifjúság tér</td><td>2.63</td><td>46</td><td>4</td></tr>
+                        <tr><td>Ifjúság tér</td><td>Régi strand</td><td>2.08</td><td>18</td><td>36</td></tr>
+                        <tr><td>Régi strand</td><td>Csömöri Kitekintő</td><td>1.56</td><td>41</td><td>4</td></tr>
+                        <tr><td>Csömöri Kitekintő</td><td>Hungaroring</td><td>3.71</td><td>49</td><td>58</td></tr>
+                        <tr><td>Hungaroring</td><td>Természetes energiaállomás</td><td>2.44</td><td>57</td><td>42</td></tr>
+                        <tr><td>Természetes energiaállomás</td><td>Szent László Kilátó</td><td>0.85</td><td>89</td><td>1</td></tr>
+                        <tr><td>Szent László Kilátó</td><td>Szár-hegy</td><td>3.57</td><td>92</td><td>87</td></tr>
+                        <tr><td>Szár-hegy</td><td>Őr-hegy</td><td>4.01</td><td>88</td><td>138</td></tr>
+                        <tr><td>Őr-hegy</td><td>Erzsébet királyné emlékmű</td><td>2.22</td><td>15</td><td>63</td></tr>
+                        <tr><td>Erzsébet királyné emlékmű</td><td>Török Ignác szobor</td><td>1.33</td><td>2</td><td>26</td></tr>
+                        <tr><td>Török Ignác szobor</td><td>Hulladékkezelő</td><td>5.36</td><td>99</td><td>55</td></tr>
+                        <tr><td>Hulladékkezelő</td><td>Öregszőlő</td><td>6.69</td><td>101</td><td>155</td></tr>
+                        <tr><td>Öregszőlő</td><td>Füzesliget</td><td>2.70</td><td>6</td><td>35</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="refreshment" class="section">
+            <div class="section-heading">
+                <h2>Frissítő pontok</h2>
+                <p>Vízvételi lehetőségek közötti távolságok. Csap csak nyári időszakban! Kút télen is használható.</p>
+                <p>Az útvonalon boltok, benzinkút is található, a nyitvatartást ellenőrizd!</p>
+            </div>
+            <div class="table-wrapper">
+                <table class="tour-table">
+                    <thead>
+                        <tr>
+                            <th>Vízforrás</th>
+                            <th>Frissítő pont</th>
+                            <th>Következő</th>
+                            <th>Távolság (km)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Csap</td><td>Nagytarcsa Füzesliget</td><td>Kistarcsa templom után</td><td>2.03</td></tr>
+                        <tr><td>Kút</td><td>Kistarcsa templom után</td><td>Kistarcsa Ifjúság tér</td><td>0.6</td></tr>
+                        <tr><td>Csap</td><td>Kistarcsa Ifjúság tér</td><td>Csömör Mogyoródi utca</td><td>2.73</td></tr>
+                        <tr><td>Kút</td><td>Csömör Mogyoródi utca</td><td>Természetes energiaállomás</td><td>7.06</td></tr>
+                        <tr><td>Csap</td><td>Természetes energiaállomás</td><td>Erzsébet királyné emlékmű</td><td>10.65</td></tr>
+                        <tr><td>Csap</td><td>Erzsébet királyné emlékmű</td><td>Gödöllő Vak Bottyán utca</td><td>2.03</td></tr>
+                        <tr><td>Kút</td><td>Gödöllő Vak Bottyán utca</td><td>Nagytarcsa Polgármesteri hivatal</td><td>12.85</td></tr>
+                        <tr><td>Csap</td><td>Nagytarcsa Polgármesteri hivatal</td><td>Nagytarcsa Füzesliget</td><td>1.23</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="description" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Túraleírás</p>
+                <h2>Útvonalpontok és látnivalók</h2>
+                <p>
+                    A végleges túraleírás és fotók feltöltés alatt.
+                    Az útvonalpontok Füzesligettől Csömör irányában vannak sorbarendezve.
+                </p>
+            </div>
+            <div class="story-grid">
+                <article class="story-card">
+                    <a href="assets/images/Fuzesliget.jpg" target="_blank">
+                        <img src="assets/images/Fuzesliget.jpg" alt="Füzesliget" class="story-image">
+                    </a>
+                    <h3>Nagytarcsa Füzesliget</h3>
+                    <p>Ellenőrző és frissítő pont.</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Kistarcsa_kut.jpg" target="_blank">
+                        <img src="assets/images/Kistarcsa_kut.jpg" alt="Kistarcsa kút" class="story-image">
+                    </a>
+                    <h3>Kistarcsa nyomós kút</h3>
+                    <p>Frissítő pont, háttérben a templom</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Kistarcsa_hibas_kut.jpg" target="_blank">
+                        <img src="assets/images/Kistarcsa_hibas_kut.jpg" alt="Kistarcsa nem működő kút" class="story-image">
+                    </a>
+                    <h3>Kistarcsa nem működő kút</h3>
+                    <p>Hősök tere előtt, nem működik!</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Ifjusag_ter.jpg" target="_blank">
+                        <img src="assets/images/Ifjusag_ter.jpg" alt="Ifjúság tér" class="story-image">
+                    </a>
+                    <h3>Kistarcsa Ifjúság tér</h3>
+                    <p>Ellenőrző és frissítő pont. Háttérben a HÉV átjáró, ahol az útvonal halad.</p>
+                </article>
+                <article class="story-card">
+                    <div class="photo-placeholder" aria-label="Feltöltés alatt">Fotó</div>
+                    <h3>Csömör Régi strand</h3>
+                    <p>Ellenőrző pont. Természetismereti park és tanösvény. Egy meredek kis kaptató vezet le, ha elvéted kicsit később is van egy másik, vagy még tovább a hídon át.</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Csomori_kitekinto.jpg" target="_blank">
+                        <img src="assets/images/Csomori_kitekinto.jpg" alt="Csömöri Kitekintő" class="story-image">
+                    </a>
+                    <h3>Csömöri Kitekintő</h3>
+                    <p>Ellenőrző pont. Kilátás a Budai hegyekre.</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Csomor_kut.jpg" target="_blank">
+                        <img src="assets/images/Csomor_kut.jpg" alt="Csömör kút" class="story-image">
+                    </a>
+                    <h3>Csömör nyomós kút</h3>
+                    <p>Frissítő pont. Mogyoródi utcában, rövid kitérő.</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Hungaroring.jpg" target="_blank">
+                        <img src="assets/images/Hungaroring.jpg" alt="Hungaroring" class="story-image">
+                    </a>
+                    <h3>Hungaroring</h3>
+                    <p>Ellenőrző pont. Benzinkút nyitvatartási időben elérhető, nem 0-24!</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Energiaallomas.jpg" target="_blank">
+                        <img src="assets/images/Energiaallomas.jpg" alt="Természetes energiaállomás" class="story-image">
+                    </a>
+                    <h3>Természetes energiaállomás</h3>
+                    <p>Ellenőrző és frissítő pont. Szent László tanösvény mentén található kiállítás és fedett pihenő. Szabadon látogatható, 0-24 nyitva, kapun belül mosdó is található.</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Energiaallomas_csap.jpg" target="_blank">
+                        <img src="assets/images/Energiaallomas_csap.jpg" alt="Természetes energiaállomás csap" class="story-image">
+                    </a>
+                    <h3>Természetes energiaállomás csap</h3>
+                    <p>Frissítő pont.<p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Szent_Laszlo_hangulat.jpg" target="_blank">
+                        <img src="assets/images/Szent_Laszlo_hangulat.jpg" alt="Természetes energiaállomásról hangulatkép" class="story-image">
+                    </a>
+                    <h3>Távolban a Somlyó-hegy</h3>
+                    <p>A Természetes energiaállomástól látszik a következő/előző ellenőrzőpont.<p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Szent_Laszlo_torony.jpg" target="_blank">
+                        <img src="assets/images/Szent_Laszlo_torony.jpg" alt="Szent László Kilátó" class="story-image">
+                    </a>
+                    <h3>Szent László Kilátó és Kápolna</h3>
+                    <p>Ellenőrző pont. A mogyoródi Somlyó-hegy (Gyertyános) tetején, Makovecz Imre tervezte, 2022-ben felújították.Egész évben 0-24 szabadon látogatható.</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Szent_Laszlo_kilatas.jpg" target="_blank">
+                        <img src="assets/images/Szent_Laszlo_kilatas.jpg" alt="Szent László Kilátás" class="story-image">
+                    </a>
+                    <h3>Kilátás  a toronyból</h3>
+                    <p>A kilátóból 270 fokos panora tárul elénk.</p>
+                </article>
+                <article class="story-card">
+                    <div class="photo-placeholder" aria-label="Feltöltés alatt">Fotó</div>
+                    <h3>Szár-hegy</h3>
+                    <p>Ellenőrző pont. Feltöltés alatt</p>
+                </article>
+                <article class="story-card">
+                    <div class="photo-placeholder" aria-label="Feltöltés alatt">Fotó</div>
+                    <h3>Gödöllői út átkelő</h3>
+                    <p>Autóforgalom! A zöld jelzésű turistaút átvezet az úton, figyelmesen haladj!</p>
+                </article>
+                <article class="story-card">
+                    <div class="photo-placeholder" aria-label="Feltöltés alatt">Fotó</div>
+                    <h3>Őr-hegy</h3>
+                    <p>Ellenőrző pont. Feltöltés alatt</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Erzsebet_szobor.jpg" target="_blank">
+                        <img src="assets/images/Erzsebet_szobor.jpg" alt="Erzsébet királyné emlékmű" class="story-image">
+                    </a>
+                    <h3>Gödöllő Erzsébet királyné emlékmű</h3>
+                    <p>Ellenőrző és frissítő pont. Erzsébet parkban, mögötte van a Sziklahalom emlékmű, melyen az útvonal szintén átvezet. 0-24 szabadon látogatható.</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Kastelypark.jpg" target="_blank">
+                        <img src="assets/images/Kastelypark.jpg" alt="Kastélypark" class="story-image">
+                    </a>
+                    <h3>Gödöllő Kastélypark</h3>
+                    <p>A hivatalos útvonal átvezet rajta, de csak nyitvatartási időben! Kis kitérővel a Tessedik Sámuel úton lehet megkerülni.</p>
+                </article>
+                <article class="story-card">
+                    <div class="photo-placeholder" aria-label="Feltöltés alatt">Fotó</div>
+                    <h3>Gödöllő Török Ignác szobor</h3>
+                    <p>Ellenőrző pont. Feltöltés alatt</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Godollo_hibas_kut.jpg" target="_blank">
+                        <img src="assets/images/Godollo_hibas_kut.jpg" alt="Gödöllő nem működő kút" class="story-image">
+                    </a>
+                    <h3>Gödöllő nem működő kút</h3>
+                    <p>Hajnal utca sarkon, nem működik!</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Godollo_kut.jpg" target="_blank">
+                        <img src="assets/images/Godollo_kut.jpg" alt="Gödöllő kút" class="story-image">
+                    </a>
+                    <h3>Gödöllő nyomós kút</h3>
+                    <p>Frissítő pont Vak Bottyán utca sarkon.</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Godollo_napelempark.jpg" target="_blank">
+                        <img src="assets/images/Godollo_napelempark.jpg" alt="Gödöllő reptér mögött" class="story-image">
+                    </a>
+                    <h3>Gödöllői sportrepülőtér mögött</h3>
+                    <p>
+                        Bal szélen a Napelempark 20-25 hektáron terül el ahol akkumulátoros energiatárolás is megvalósul.
+                        Háttérben a Premontrei Apátság temploma, mely 2024-ben épült.
+                    </p>
+                </article>
+                <article class="story-card">
+                    <div class="photo-placeholder" aria-label="Feltöltés alatt">Fotó</div>
+                    <h3>Gödöllői sportrepülőtér mögötti ösvények</h3>
+                    <p>Túrázók által kevésbé használt ösvények, így különösen esőzések után magasabb az aljnövényzet.</p>
+                </article>
+                <article class="story-card">
+                    <div class="photo-placeholder" aria-label="Feltöltés alatt">Fotó</div>
+                    <h3>Kerepes Hulladékkezelő</h3>
+                    <p>Ellenőrző pont. Ökörtelek-völgyi Hulladékkezelő Központ.</p>
+                </article>
+                <article class="story-card">
+                    <div class="photo-placeholder" aria-label="Feltöltés alatt">Fotó</div>
+                    <h3>Nagytarcsa Öregszőlő</h3>
+                    <p>Ellenőrző pont. Feltöltés alatt</p>
+                </article>
+                <article class="story-card">
+                    <a href="assets/images/Polgi.jpg" target="_blank">
+                        <img src="assets/images/Polgi.jpg" alt="Polgármesteri hivatal" class="story-image">
+                    </a>
+                    <h3>Nagytarcsa Polgármesteri hivatal</h3>
+                    <p>Frissítő pont. Az épület 19. század végi historizáló vidéki községháza modern belsővel.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="history" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Történelem</p>
+                <h2>Egy túra – ami szívből jött</h2>
+                <p>
+                    Ez nem csak egy útvonal, hanem egy szerelemprojekt, így a szív alak nem véletlen.
+                    Minden benne van, amit szeretek: természet, mozgás, kreativitás és közösség.
+                </p>
+                <p>
+                    A Gödöllői-dombság különleges hely: változatos, izgalmas, mégis meglepően kevés a hosszabb, kör jellegű instant túra.
+                    Régóta foglalkoztatott a gondolat, hogy létrehozzak egy olyan útvonalat, amely nemcsak kihívás, hanem élmény is – amit bárki, bármikor teljesíthet.
+                </p>
+                <p>
+                    A környéken már több remek kezdeményezés is létezik – például a QR-kódos villámkörök
+                    👉 <a href="https://villamkor.hu/" target="_blank" rel="noopener noreferrer">
+                Villámkörök
+                        </a>
+                 vagy a szintén geogo-alapú és verseny
+                👉 <a href="https://ntse.hu/tarcsa-trail" target="_blank" rel="noopener noreferrer">
+                  Tarcsa Trail
+                    </a>
+                útvonalak. Ezek inspirációt adtak, de szerettem volna egy szabadabban teljesíthető egyedi túrát létrehozni.
+                </p>
+                <p>
+                    A Gödöllői-dombság ösvényeiből, évek felfedezéséből született meg ez a különleges kör,
+                    amely szabadon teljesíthető – akárhonnan indulva. A geogo rendszer segít a nyomkövetésben és az igazolásban,
+                    így az élmény egyszerre modern és természetközeli.
+                </p>
+                <p>Az útvonal rajz is fontos része a történetnek. Nem csak A-ból B-be vezet: forma is születik belőle.
+                Már korábban is készítettem futás közben „rajzolt” alakzatokat – kutyát, sast, malacot, futó figurát.
+                </p>
+                <p>
+                    A cél: kiszakadni a megszokottból, új ösvényeket felfedezni, és valódi terepélményt adni – futóknak, túrázóknak egyaránt.
+                    A teljesítésért kézzel készített egyedi érem jár – mert ez a projekt nem egy üzlet, hanem közösség és alkotás.
+                </p>
+            </div>
+            <h2>Mi jön még?</h2>
+            <p>Még nagyon képlékeny, de a tervek között szerepelnek:</p>
+            <p>- új, tematikus (akár szív alakú) útvonalak</p>
+            <p>- közös futások</p>
+            <p>- extra díjak a leggyorsabbaknak</p>
+            <p>- egyedi ajándékok és meglepetések</p>
+            <p>
+                Lépj ki a rutinból. Gyere az erdőbe. Rajzold meg te is a szívet. ❤️
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+
+
+        <div class="footer-left">
+            <span>Gödöllői Szív Maraton</span>
+        </div>
+
+        <div class="footer-center">
+            <i class="far fa-copyright"> <span>2026</span> </i>
+            <span>Publikus instant túraoldal</span>
+        </div>
+
+
+        <div class="footer-icons">
+            <!-- Facebook LATER:title="Facebook" -->
+            <a href="https://facebook.com" target="_blank" title="Később">
+                <i class="fab fa-facebook"></i>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:gemolaci@gmail.com" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+
+            <!-- Mobile -->
+            <a href="tel:+36703974343" title="Telefon">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
+
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-gpx@1.7.0/gpx.js"></script>
+    <script src="https://unpkg.com/@raruto/leaflet-elevation/dist/leaflet-elevation.js"></script>
+    <script src="js/completions.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
