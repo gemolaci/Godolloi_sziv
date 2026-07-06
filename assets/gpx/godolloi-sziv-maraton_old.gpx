@@ -54,12 +54,6 @@
   <sym>Checkpoint</sym>
   <type>Checkpoint</type>
  </wpt>
- <wpt lat="47.55055" lon="19.23481">
-  <name>Nem működő kút</name>
-  <desc></desc>
-  <sym>Alert</sym>
-  <type>Alert</type>
- </wpt>
  <wpt lat="47.55157" lon="19.23194">
   <name>Kút</name>
   <desc></desc>
@@ -419,14 +413,11 @@
    <trkpt lat="47.54928" lon="19.235490000000002">
     <ele>196.28</ele>
    </trkpt>
-   <trkpt lat="47.54928" lon="19.235480000000003">
-    <ele>196.28</ele>
-   </trkpt>
-   <trkpt lat="47.5499150004673" lon="19.23514500406963">
+   <trkpt lat="47.549880000526485" lon="19.235185003429567">
     <ele>199.51000000000002</ele>
    </trkpt>
-   <trkpt lat="47.55055" lon="19.234810000000003">
-    <ele>202.85000000000002</ele>
+   <trkpt lat="47.55048000000001" lon="19.23488">
+    <ele>202.52</ele>
    </trkpt>
    <trkpt lat="47.550850000000004" lon="19.23466">
     <ele>203.3</ele>
