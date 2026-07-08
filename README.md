@@ -1,17 +1,18 @@
-# Gödöllői Szív Maraton
 
-Statikus publikus weboldal alap a Gödöllői Szív Maraton instant túrához.
+# Gödöllői Szív Maraton (Gödöllő Heart Marathon)
 
-## Tartalom
+This repository contains a static, public single-page website template for the Gödöllői Szív Maraton instant tour.
 
-- egyoldalas HTML/CSS/JavaScript oldal
-- Leaflet térkép OpenStreetMap alaptérképpel
-- Leaflet GPX plugin helyi GPX fájl betöltéséhez
-- GPX letöltési gomb
-- túraleírás szekció fotóhelyekkel
-- teljesítési lista szekció geogo.hu integráció előkészítéséhez
+## Overview
 
-## Fájlkiosztás
+- Single-page HTML/CSS/JavaScript site
+- Leaflet map using OpenStreetMap base tiles
+- Leaflet GPX plugin to load a local GPX file
+- GPX download button
+- Route description section with photo stops
+- Completion list section prepared for geogo.hu integration
+
+## File layout
 
 ```text
 .
@@ -27,23 +28,28 @@ Statikus publikus weboldal alap a Gödöllői Szív Maraton instant túrához.
     └── completions.js
 ```
 
-## Helyi futtatás
+## Local development
 
-A GPX fájl böngészős betöltése miatt érdemes helyi webszerverrel futtatni:
+Because the GPX file is loaded from the browser, run a local web server to test the site:
 
 ```powershell
 python -m http.server 8000
 ```
 
-Ezután nyisd meg:
+Then open:
 
-```text
 http://localhost:8000
-```
 
-## Következő lépések
+## TODO (planned enhancements)
 
-1. Cseréld le az `assets/gpx/godolloi-sziv-maraton.gpx` fájlt a végleges útvonalra.
-2. A túraadatokat pontosítsd az `index.html` fő adataiban.
-3. A fotóhelyeket cseréld valós képekre.
-4. A `js/completions.js` fájlban a mintaadatokat váltsa fel geogo.hu iframe vagy API integráció.
+- Add support for multiple routes and an in-site route selector:
+  - store additional GPX files under `assets/gpx/` (e.g., `assets/gpx/new-route.gpx`)
+  - provide a UI to select and load different GPX routes
+  - update the GPX download button to offer the currently selected route
+
+- Add English / Hungarian language switching (i18n):
+  - extract static text to language resource files (e.g., `i18n/en.json`, `i18n/hu.json`)
+  - implement a language toggle in the UI and persist the choice (localStorage)
+  - load translated strings on page init and when the user switches language
+
+Contributions and pull requests are welcome. If you need help implementing any TODO item, open an issue describing the desired change.
