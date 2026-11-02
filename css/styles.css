@@ -280,6 +280,19 @@ h3 {
         object-fit: contain;
     }
 
+.hero-update {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 3;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
 /* Buttons */
 .button {
     display: inline-flex;
