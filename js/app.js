@@ -1,6 +1,47 @@
 (function () {
   var gpxPath = "assets/gpx/godolloi-sziv-maraton.gpx";
   var status = document.getElementById("map-status");
+  var refreshmentList = document.getElementById("refreshment-list");
+  var seasonToggle = document.getElementById("season-toggle");
+  var seasonLabel = document.getElementById("season-label");
+  var seasonStatus = document.getElementById("season-status");
+
+  if (refreshmentList && seasonToggle) {
+    var summerRows = refreshmentList.innerHTML;
+    var winterRows = [
+      ["Kút", "Kistarcsa templom után", "Csömör Mogyoródi utca", "3.33"],
+      ["Kút", "Csömör Mogyoródi utca", "Gödöllő Vak Bottyán utca", "19.74"],
+      ["Kút", "Gödöllő Vak Bottyán utca", "Kistarcsa templom után", "16.11"]
+    ];
+
+    function renderWinterRows() {
+      refreshmentList.innerHTML = "";
+
+      winterRows.forEach(function (item) {
+        var row = document.createElement("tr");
+
+        item.forEach(function (value) {
+          var cell = document.createElement("td");
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+
+        refreshmentList.appendChild(row);
+      });
+    }
+
+    seasonToggle.addEventListener("change", function () {
+      if (seasonToggle.checked) {
+        renderWinterRows();
+        seasonLabel.textContent = "Téli időszak";
+        seasonStatus.textContent = "Csak kutak";
+      } else {
+        refreshmentList.innerHTML = summerRows;
+        seasonLabel.textContent = "Nyári időszak";
+        seasonStatus.textContent = "Csapok és kutak";
+      }
+    });
+  }
 
   var map = L.map("map", {
     scrollWheelZoom: false
